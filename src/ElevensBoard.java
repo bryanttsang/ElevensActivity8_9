@@ -27,7 +27,7 @@ public class ElevensBoard extends Board {
      * The values of the cards for this game to be sent to the deck.
      */
     private static final int[] POINT_VALUES =
-            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0};
+            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99, 9900, 990000};
 
     /**
      * Flag used to control debugging print statements.
@@ -53,8 +53,20 @@ public class ElevensBoard extends Board {
      */
     @Override
     public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        return true;
+        int sum = 0;
+		for (int i = 0; i < selectedCards.size(); i++)
+        {
+            sum += selectedCards.get(i);
+        }
+        if (selectedCards.size() == 2 && sum == 11)
+        {
+            return true;
+        }
+        if (selectedCards.size() == 3 && sum == 999999)
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -80,8 +92,15 @@ public class ElevensBoard extends Board {
      *              contain an 11-pair; false otherwise.
      */
     private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        return true;
+        if (selectedCards.size() != 2)
+        {
+            return false;
+        }
+		if (selectedCards.get(0) + selectedCards.get(1) == 11)
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -93,7 +112,14 @@ public class ElevensBoard extends Board {
      *              include a jack, a queen, and a king; false otherwise.
      */
     private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-        return true;
+        if (selectedCards.size() != 3)
+        {
+            return false;
+        }
+        if (selectedCards.get(0) + selectedCards.get(1) + selectedCards.get(2) == 999999)
+        {
+            return true;
+        }
+        return false;
     }
 }
