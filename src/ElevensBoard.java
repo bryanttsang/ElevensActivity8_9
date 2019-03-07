@@ -27,7 +27,7 @@ public class ElevensBoard extends Board {
      * The values of the cards for this game to be sent to the deck.
      */
     private static final int[] POINT_VALUES =
-            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 99, 9900, 990000};
+            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9009, 90090, 900900};
 
     /**
      * Flag used to control debugging print statements.
@@ -74,14 +74,26 @@ public class ElevensBoard extends Board {
                 values.add(cardAt(i).pointValue());
             }
         }
-        int temp;
+        boolean j = false;
+        boolean q = false;
+        boolean k = false;
+        for (int i = 0; i < values.size(); i++)
+        {
+            if (values.get(i) == 9009) { j = true; }
+            if (values.get(i) == 90090) { q = true; }
+            if (values.get(i) == 900900) { k = true; }
+        }
 		for (int a = 0; a < values.size(); a++)
         {
             for (int b = 0; b < values.size(); b++)
             {
                 if (values.get(a) + values.get(b) == 11)
+                {
+                    return true;
+                }
             }
         }
+        return (j && q && k);
     }
 
     /**
@@ -97,7 +109,7 @@ public class ElevensBoard extends Board {
         {
             return false;
         }
-		if (selectedCards.get(0) + selectedCards.get(1) == 11)
+		if (cardAt(selectedCards.get(0)).pointValue() + cardAt(selectedCards.get(1)).pointValue() == 11)
         {
             return true;
         }
@@ -117,7 +129,7 @@ public class ElevensBoard extends Board {
         {
             return false;
         }
-        if (selectedCards.get(0) + selectedCards.get(1) + selectedCards.get(2) == 999999)
+        if (cardAt(selectedCards.get(0)).pointValue() + cardAt(selectedCards.get(1)).pointValue() + cardAt(selectedCards.get(2)).pointValue() == 999999)
         {
             return true;
         }
